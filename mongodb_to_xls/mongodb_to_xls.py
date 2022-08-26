@@ -1,7 +1,7 @@
 import pymongo
 import xlwt
 
-def mongodb_to_xls(db_name,xls_path):
+def mongodb_to_xls(db_name,set_name,xls_path,port=27017):
     #初始化变量
     key_list=[]
     l,i=-1,0
@@ -9,9 +9,9 @@ def mongodb_to_xls(db_name,xls_path):
     book = xlwt.Workbook(encoding='utf-8')
     sheet = book.add_sheet('json',cell_overwrite_ok=True)
     #初始化数据库
-    myclient = pymongo.MongoClient('mongodb://localhost:27017/')
-    db = myclient.testdb #testdb可按需求改动
-    coll = db.get_collection(db_name)
+    myclient = pymongo.MongoClient(f'mongodb://localhost:{port}/')
+    db = myclient[db_name] #testdb可按需求改动
+    coll = db.get_collection(set_name)
     #开始写入
     for i in coll.find():
         for x in i.items(): 
@@ -24,9 +24,15 @@ def mongodb_to_xls(db_name,xls_path):
                 i,l=1,l+1
                 #写入
                 #i 列，l 行
-                for i in range(len(key_list)):
-                    sheet.write(l,i,str(key_list[i]))
+                for y in range(len(key_list)):
+                    if isinstance(key_list[y],list):
+                        z=y
+                        for u in key_list[y]:
+                            sheet.write(l,z,str(u))
+                            z+=1
+                    else:
+                        sheet.write(l,y,str(key_list[y]))
     book.save(xls_path)
 
 #示例
-mongodb_to_xls("userdb","D:\\test123.xls")
+mongodb_to_xls("testdb","userdb","D:\\test1234567.xls")
