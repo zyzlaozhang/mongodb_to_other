@@ -1,6 +1,8 @@
 # -mongodb-python-
 与mongodb有关
 
+_python 版本 -3.10.6_
+
 ## 1.mongodb转xls
 
 请确保自己的mongodb为此格式
