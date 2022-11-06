@@ -1,10 +1,11 @@
-# -mongodb-python-
-与mongodb有关
+# 导入方法
+```cmd
+pip install mongodb_to_xls
+```
 
-_python 版本 -3.10.6_
+## 一.mongodb转xls
 
-## 1.mongodb转xls
-
+### 1.1注意事项
 请确保自己的mongodb为此格式
 
 _加粗的可以自行更改_
@@ -13,27 +14,42 @@ _加粗的可以自行更改_
 >>collections
 >>>**userdb**
 
-本功能有两种方法调用
+### 1.2 导入
 
-### 1.1 python函数
+```python
+    from mongodb_to_other import mongodb_to_xls
+```
+### 1.3使用
 
-_以下代码请保证代码文件与 **mongodb_to_xls**在同一级目下运行_
+```python
+    from mongodb_to_other import mongodb_to_xls
+    #倒库
+    mongodb_to_xls("数据名","集合名","xls文件路径",port=int('数据库端口(默认为27017)'),ip="mongodb数据库所在的ip地址(默认为127.0.0.1)",name="数据库用户名(默认为None)",password="数据库密码(默认为None)")
+```
+在上面代码中 *mongodb_to_xls* 函数有三个必要值，**第一个值**为数据库的名称，**第二个值**为数据库中collections文件夹下要转换的集合，**第三个值**为要输出的文件地址
+
+## 二.mongodb转json
+
+### 1.1简介
+**注意事项与*mongodb转xls*一样**
+这一个模块主要是为了*windows*用户设计
+因为*windows*用户无法使用*mongodb的导出工具*
+
+### 1.2导入
 
 
 ```python
-    from mongodb_to_xls.mongodb_to_xls import mongodb_to_xls
+    from mongodb_to_other import mongodb_to_json
+```
+
+### 1.3使用
+
+```python
+    from mongodb_to_other import mongodb_to_json
     #倒库
-    mongodb_to_xls("testdb","userdb","D:\\test.xls")
+    mongodb_to_json("数据名","集合名","xls文件路径",port=int('数据库端口(默认为27017)'),ip="mongodb数据库所在的ip地址(默认为127.0.0.1)",name="数据库用户名(默认为None)",password="数据库密码(默认为None)")
 ```
-在上面代码中 *mongodb_to_xls* 函数有三个值，**第一个值**为数据库的名称，**第二个值**为数据库中collections文件夹下要转换的集合，**第三个值**为要输出的文件地址
+在上面代码中 *mongodb_to_xls* 函数有三个必要值，**第一个值**为数据库的名称，**第二个值**为数据库中collections文件夹下要转换的集合，**第三个值**为要输出的文件地址
 
-**如何将testdb更改为自己的db,打开*mongodb_to_xls.py*找到**
-
-### 1.2 命令行
-打开cmd输入 
-```
- python mongodb_to_xls_cmd.py testdb userdb D:\\test.xls
-```
-三个值与1.1相同，不过多赘述
-
+给个星星吧
 
