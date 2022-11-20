@@ -1,6 +1,6 @@
 # 导入方法
 ```cmd
-pip install mongodb_to_xls
+pip install mongodb_to_other
 ```
 
 ## 一.mongodb转xls
